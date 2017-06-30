@@ -1,0 +1,61 @@
+<style>
+  .name{
+    float:right;
+  margin-right:30px;
+  }
+    .form-group{
+      margin-top:50px;
+    }
+    a{
+    margin-right:20px;
+    float:right;
+    }
+  .alert{
+    text-align: center;
+    font-size:30px;
+    color:red;
+  }
+    .btn{
+      float:right;
+    }
+    .form-control{
+      width:1000px;
+    }
+</style>
+
+<div class="container">
+
+<h2>제목 : <%= @post.title %></h2>
+  <p class="name">글쓴이 : <%= @post.user.email %></p>
+
+<p>내용 : <%= @post.content %></p>
+  <img src = "<%=@post.img_url%>">
+
+  <% if user_signed_in? %>
+      <form method= "get" action = "/home/read/<%= @post.id%>/reply_create">
+        <div class="form-group">
+          <label for="title">댓글 입력</label>
+          <button type="submit" class="btn btn-Primary">작성하기</button>
+          <input type="text" class="form-control" id="title" name = "title" placeholder="댓글 내용">
+        </div>
+
+      </form>
+  <%else%>
+      <div class="container">
+
+        <p class="alert">댓글을 달려면 로그인이 필요합니다.</p>
+
+      </div>
+  <%end%>
+</div>
+<p></p>
+<div class="container kuboon">
+<% @post.comments.each do |comment| %>
+      <%if comment.user == current_user %>
+          <a class ="btn btn-danger" href ='<%= @post.id %>/comment_destroy/<%= comment.id %>' role="button">삭제</a>
+          <a class ="btn btn-info" href ='<%= @post.id %>/reply_update/<%= comment.id %>'>수정</a>
+      <% end %>
+  <p>작성자 : <%= comment.user.email %> </p>
+  <p>댓글 : <%= comment.title %> </p>
+  <% end %>
+</div>

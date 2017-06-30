@@ -1,0 +1,25 @@
+<style>
+  .name{
+    float:right;
+  margin-right:30px;
+  }
+    .form-group{
+      margin-top:50px;
+    }
+    .home {
+      float:right;
+
+    }
+</style>
+<div class="container">
+  <h2>제목 : <%= @post.title %></h2>
+  <p>내용 : <%= @post.content %></p>
+  <img src = "<%=@post.img_url%>">
+
+  <form method="get" action="/home/read/<%=@post.id%>/reply_real_update/<%=@comment.id%>" >
+        <div class = 'kuboon'>
+          <input type="text" value = "<%=@comment.title%>" name = "title" id="title">
+          <button type="submit" class="btn btn-info">수정하기</button>
+        </div>
+  </form>
+</div>

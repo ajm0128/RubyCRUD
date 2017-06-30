@@ -1,0 +1,60 @@
+<style>
+  textarea  {
+    resize:none;
+    margin-bottom:20px;
+  }
+    .kuboon
+    {
+      border : 1px solid green;
+      background-color:lightgreen;
+    }
+    button{
+      float:right;
+      margin-right:20px;
+    }
+    .id{
+      width:70px;
+    }
+    .title{
+      width:200px;
+    }
+    .content{
+      width:300px;
+    }
+    .name{
+      width:200px;
+    }
+</style>
+<div class="container">
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>글번호</th>
+    <th>제목</th>
+    <th>내용</th>
+    <th>글쓴이</th>
+  </tr>
+  </thead>
+  <tbody class = "kuboon">
+  <%@posts.each do |post|%>
+      <tr>
+        <td class ="id"><%=post.id%></td>
+        <td class ="title">
+          <a href="/home/read/<%=post.id%>">
+            <%=post.title%>
+          </a>
+        </td>
+        <td class = "content"><%=post.content%></td>
+        <td class = "name"><%= post.user.email %></td>
+        <% if post.user == current_user %>
+        <td class="write"><button type="button" onclick="location.href='/home/destroy/<%=post.id%>'" class="btn btn-danger">삭제하기</button></td>
+        <td class="write"><button type="button" onclick="location.href='/home/update/<%=post.id%>'" class="btn btn-warning">수정하기</button></td>
+        <% else %>
+        <td class="write"></td>
+        <td class="write"></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>

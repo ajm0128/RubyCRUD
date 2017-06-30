@@ -1,0 +1,62 @@
+<style>
+
+  .write
+  {
+    float:right;
+  }
+  .btn
+  {
+    margin-right:20px;
+    float:right;
+  }
+    .user{
+      margin-right : 30px;
+      margin-top : 30px;
+      float:right;
+    }
+</style>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Week9</title>
+    <%= csrf_meta_tags %>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+   <div class="container">
+     <% if user_signed_in? %>
+         <p class = "user">로그인중인 ID : <%= current_user.email %> </p>
+     <%end%>
+    <div class="logo"><%=image_tag("logo.png")%></div>
+
+     <div class="write"><button type="button" onclick="location.href='/home/write/'" class="btn btn-info">글쓰기</button></div>
+
+         <% if user_signed_in? %>
+         <a class="btn btn-success" href="/users/sign_out" role="button">로그아웃</a>
+     <% else %>
+     <a class="btn btn-success" href="/users/sign_in" role="button">로그인</a>
+    <%end%>
+     <a class="btn btn-warning" href="/" role="button">Home</a>
+         <h2>인하대학교 LikeLion 게시판 </h2>
+     <a class="btn btn-success" href="" role="button">비밀번호수정</a>
+   </div>
+
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+  <!-- Footer Starts -->
+  <div class="footer text-center spacer">
+    Copyright 2017 LikeLion InhaUniv. All rights reserved.
+  </div>
+</html>
